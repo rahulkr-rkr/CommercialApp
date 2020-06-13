@@ -1,0 +1,154 @@
+﻿@model CommercialApp.Models.Loan
+
+@{
+    ViewBag.Title = "LoanView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="stepwizard">
+            <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step col-xs-1">
+                    <a href="#step-1" type="button" class="btn btn-info btn-circle">1</a>
+                    <p><small>Application</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-2">
+                    <a href="#step-2" type="button" class="btn btn-info btn-circle">2</a>
+                    <p><small>Business Information</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-1">
+                    <a href="#step-3" type="button" class="btn btn-info btn-circle">3</a>
+                    <p><small>Personal Information</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-2">
+                    <a href="#step-4" type="button" class="btn btn-info btn-circle">4</a>
+                    <p><small>Payroll calculation</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-1">
+                    <a href="#step-5" type="button" class="btn btn-success btn-circle">5</a>
+                    <p><small>Loan Information</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-2">
+                    <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                    <p><small>Account Information</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-1">
+                    <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
+                    <p><small>Beneficiary ownership</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-2">
+                    <a href="#step-8" type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
+                    <p><small>Summary</small></p>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <form role="form">
+            <div class="panel panel-primary setup-content" id="step-5">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Paycheck Protection Program Loan Application</h3>
+                </div>
+
+
+                <div class="form-horizontal">
+                    <h4><b>Loan Information</b></h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.loan_term, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.loan_term, new List<SelectListItem>()
+                              { new SelectListItem() { Text = "5" },
+                                new SelectListItem() { Text = "8" },
+                                new SelectListItem() { Text = "10" },
+                                new SelectListItem() { Text = "15" },
+                                new SelectListItem() { Text = "20" }
+                              }, "Select Loan Term", htmlAttributes: new { @class = "form-control" })
+                            @*Html.EditorFor(model => model.loan_term, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.loan_term, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.interest_rate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.interest_rate, new List<SelectListItem>()
+                              { new SelectListItem() { Text = "2" },
+                                new SelectListItem() { Text = "4" },
+                                new SelectListItem() { Text = "5" },
+                                new SelectListItem() { Text = "7" },
+                                new SelectListItem() { Text = "10" }
+                              }, "Choose Interest rate", htmlAttributes: new { @class = "form-control" })
+                            @*Html.EditorFor(model => model.interest_rate, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.interest_rate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.borrowed_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.borrowed_date, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.borrowed_date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.deadline_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.deadline_date, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.deadline_date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.loan_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.loan_status, new List<SelectListItem>()
+                              { new SelectListItem() { Text = "Claimed" },
+                                new SelectListItem() { Text = "Active" },
+                                new SelectListItem() { Text = "Buffer" },
+                                new SelectListItem() { Text = "Closed" }
+                              }, "What is the status of Loan", htmlAttributes: new { @class = "form-control" })
+                            @*Html.EditorFor(model => model.loan_status, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.loan_status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.applicant_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.applicant_id, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.applicant_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.business_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.business_id, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.business_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="CONTINUE" class="btn btn-primary nextBtn" />
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </form>
+        </div>
+                }
+
+                <div>
+                    @Html.ActionLink("BACK", "PayrollInfoView","PayrollInfo")
+                </div>
